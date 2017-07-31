@@ -1,11 +1,20 @@
 package austinabell8.sweme;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -25,18 +34,23 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LoginButton FBLoginButton;
 
     private CallbackManager callbackManager;
 
+    ProgressDialog progressDialog;
+    private Button mLoginBtn;
+    private Button mSignUpBtn;
+    private EditText mEmail;
+    private EditText mPassword;
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    private static final String TAG = "-app";
-
+    private static final String TAG = "Sweme";
+    private static final int RC_SIGN_IN = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +70,23 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
         FBLoginButton = (LoginButton) findViewById(R.id.facebook_login_button);
-//        FBLoginButton.setReadPermissions(Arrays.asList(
-//                "public_profile", "email", "user_birthday", "user_friends"));
-
+        mLoginBtn = (Button) findViewById(R.id.login_button);
+        mLoginBtn.setOnClickListener(this);
+        mSignUpBtn = (Button) findViewById(R.id.sign_up_button);
+        mSignUpBtn.setOnClickListener(this);
+        mEmail = (EditText) findViewById(R.id.input_email);
+        mPassword = (EditText) findViewById(R.id.input_password);
+        mPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    mLoginBtn.performClick();
+                    hideKeyboard(LoginActivity.this);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         // Callback registration
         FBLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -68,6 +96,10 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(TAG, "Austin8onFBCallbackSuccess:");
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                         WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                progressDialog = new ProgressDialog(LoginActivity.this);
+                progressDialog.setMessage(getString(R.string.authenticating));
+                progressDialog.setCancelable(false);
+                progressDialog.show();
 
                 handleFacebookAccessToken(loginResult.getAccessToken());
             }
@@ -96,17 +128,88 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         };
+    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.login_button:
+                progressDialog = new ProgressDialog(LoginActivity.this);
+                progressDialog.setMessage(getString(R.string.authenticating));
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+
+                mFirebaseAuth.signInWithEmailAndPassword(
+                        mEmail.getText().toString(), mPassword.getText().toString())
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "signInWithEmail:success");
+                                    Intent mainIntent = new Intent (LoginActivity.this, MainActivity.class);
+                                    LoginActivity.this.finish();
+                                    LoginActivity.this.startActivity(mainIntent);
+                                    progressDialog.hide();
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                    progressDialog.hide();
+                                }
+
+                                // ...
+                            }
+                        });
+                break;
+            case R.id.sign_up_button:
+                progressDialog = new ProgressDialog(LoginActivity.this);
+                progressDialog.setMessage(getString(R.string.creating_user));
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+
+                mFirebaseAuth.createUserWithEmailAndPassword(
+                        mEmail.getText().toString(), mPassword.getText().toString())
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "createUserWithEmail:success");
+                                    progressDialog.hide();
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                    progressDialog.hide();
+                                }
+
+                                // ...
+                            }
+                        });
+                break;
+        }
     }
 
     @Override
     protected void onResume(){
-
         super.onResume();
         mFirebaseAuth.addAuthStateListener(mAuthListener);
-
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mFirebaseAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mFirebaseAuth.removeAuthStateListener(mAuthListener);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -126,6 +229,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "Austin8handleFacebookSuccess:success");
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            progressDialog.hide();
                             Intent mainIntent = new Intent (LoginActivity.this, MainActivity.class);
                             LoginActivity.this.finish();
                             LoginActivity.this.startActivity(mainIntent);
@@ -136,6 +240,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             LoginManager.getInstance().logOut();
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            progressDialog.hide();
                         }
 
                         // ...
@@ -144,11 +249,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public boolean isLoggedIn() {
-        return FirebaseAuth.getInstance().getCurrentUser() != null;
+        return mFirebaseAuth.getCurrentUser() != null;
 //        AccessToken accessToken = AccessToken.getCurrentAccessToken();
 //        return accessToken != null;
     }
 
-
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 
 }

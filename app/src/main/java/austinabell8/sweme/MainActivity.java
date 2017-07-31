@@ -4,10 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,14 +15,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements FeedFragment.OnFragmentInteractionListener,
@@ -32,12 +27,14 @@ public class MainActivity extends AppCompatActivity
         View.OnClickListener {
 
     private Fragment mFragment;
+    private FeedFragment mFeedFragment;
+    private DiscoverFragment mDiscoverFragment;
+    private ProfileFragment mProfileFragment;
 
     private ViewPager viewPager;
     private BottomNavigationView navigation;
-    private List<View> viewList;
-    private Button mLogoutButton;
 
+    private SectionsPagerAdapter mSectionsPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +46,6 @@ public class MainActivity extends AppCompatActivity
 
         View view = navigation.findViewById(R.id.navigation_discover);
         view.performClick();
-
     }
 
     @Override
@@ -63,8 +59,8 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.action_logout:
-                return true;
+//            case R.id.action_logout:
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -76,22 +72,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initView() {
-        View feedView = getLayoutInflater().inflate(R.layout.fragment_feed, null);
-        View discoverView = getLayoutInflater().inflate(R.layout.fragment_discover, null);
-        View profileView = getLayoutInflater().inflate(R.layout.fragment_profile, null);
-
-        viewList = new ArrayList<>();
-        viewList.add(feedView);
-        viewList.add(discoverView);
-        viewList.add(profileView);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         viewPager = (ViewPager) findViewById(R.id.view_pager_bottom_navigation);
-        viewPager.setAdapter(pagerAdapter);
+        viewPager.setAdapter(mSectionsPagerAdapter);
         viewPager.addOnPageChangeListener(pageChangeListener);
-//        viewPager.setPageTransformer(true, new MyPageTransformer());
-
-        mLogoutButton = (Button) profileView.findViewById(R.id.log_out_button);
-        mLogoutButton.setOnClickListener(this);
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -145,29 +130,6 @@ public class MainActivity extends AppCompatActivity
 
     };
 
-    private PagerAdapter pagerAdapter = new PagerAdapter() {
-        @Override
-        public int getCount() {
-            return viewList.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView(viewList.get(position));
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            container.addView(viewList.get(position));
-            return viewList.get(position);
-        }
-    };
-
     public void logout() {
         LoginManager.getInstance().logOut();
         FirebaseAuth.getInstance().signOut();
@@ -190,4 +152,64 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
     }
+
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            Fragment fragment = null;
+            switch(position) {
+                case 0:
+                    fragment = new FeedFragment();
+                    break;
+                case 1:
+                    fragment = new DiscoverFragment();
+                    break;
+                case 2:
+                    fragment = new ProfileFragment();
+            }
+            return fragment;
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            Fragment createdFragment = (Fragment) super.instantiateItem(container, position);
+            // save the appropriate reference depending on position
+            switch (position) {
+                case 0:
+                    mFeedFragment = (FeedFragment) createdFragment;
+                    break;
+                case 1:
+                    mDiscoverFragment = (DiscoverFragment) createdFragment;
+                    break;
+                case 2:
+                    mProfileFragment = (ProfileFragment) createdFragment;
+                    break;
+            }
+            return createdFragment;
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+
+//        @Override
+//        public CharSequence getPageTitle(int position) {
+//            Locale l = Locale.getDefault();
+//            switch (position) {
+//                case 0:
+//                    return getString(R.string.title_section1).toUpperCase(l);
+//                case 1:
+//                    return getString(R.string.title_section2).toUpperCase(l);
+//                case 2:
+//                    return getString(R.string.title_section3).toUpperCase(l);
+//            }
+//            return null;
+//        }
+    }
+
 }

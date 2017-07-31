@@ -23,10 +23,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         // Required empty public constructor
     }
 
-    public static ProfileFragment newInstance() {
-        ProfileFragment fragment = new ProfileFragment();
-        return fragment;
-    }
+//    public static ProfileFragment newInstance() {
+//        ProfileFragment fragment = new ProfileFragment();
+//        return fragment;
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         inflatedCustomerLookup = inflater.inflate(R.layout.fragment_profile, container, false);
         populateCustomerList();
 
-        mLogoutButton = (Button) mLogoutButton.findViewById(R.id.log_out_button);
+        mLogoutButton = (Button) inflatedCustomerLookup.findViewById(R.id.log_out_button);
         mLogoutButton.setOnClickListener(this);
 
         return inflatedCustomerLookup;

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1002617400174",
+    "firebase_url": "https://sweme-8d762.firebaseio.com",
+    "project_id": "sweme-8d762",
+    "storage_bucket": "sweme-8d762.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002617400174:android:1385c8ca352285e4",
+        "android_client_info": {
+          "package_name": "austinabell8.sweme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002617400174-bbns2jkj0htqeb8atrn8k3emqf0l9m06.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "austinabell8.sweme",
+            "certificate_hash": "6029e1ab486a9a26d54e5a2f024543ababbe3f2b"
+          }
+        },
+        {
+          "client_id": "1002617400174-s9qs347b1umg8ppc7snbcrr5kgbbt1jr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC408jmxoadDKLL5zxj3WUVAbxdFvVW_h0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1002617400174-s9qs347b1umg8ppc7snbcrr5kgbbt1jr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

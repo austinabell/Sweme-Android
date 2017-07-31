@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#00e092</color>
+    <color name="colorPrimaryDark">#00ad64</color>
+    <color name="colorAccent">#2196F3</color>-->
+
+    <!--<color name="colorPrimaryDark">#4527A0</color>-->
+
+    <!-- purple option-->
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <!--<color name="colorAccent">#673AB7</color>-->
+
+    <!-- orange option-->
+    <!--<color name="colorAccent">#FF6D00</color>-->
+
+    <!-- blue/green option-->
+    <color name="colorAccent">#3bd39b</color>
+
+    <!-- blue option-->
+    <!--<color name="colorAccent">#1DE9B6</color>-->
+
+    <!-- black/ white option-->
+    <!--<color name="colorAccent">#eaeaea</color>-->
+
+    <!-- red option-->
+    <!--<color name="colorAccent">#d32f2f</color>-->
+
+
+    <color name="textColor">#dddddd</color>
+    <color name="darkText">#2d2d2d</color>
+
+    <color name="app_background">#303030</color>
+    <color name="dark_background">#212121</color>
+
+
+
+
+
+    <color name="black_overlay">#66000000</color>
+</resources>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Sweme</string>
+    <string name="logout">Logout</string>
+    <string name="feed">Feed</string>
+    <string name="connect">Connect</string>
+    <string name="discover">Discover</string>
+    <string name="notifications">Notifications</string>
+    <string name="profile">Profile</string>
+    <string name="facebook_app_id">875333829286542</string>
+    <string name="fb_login_protocol_scheme">fb875333829286542</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="log_out">Log Out</string>
+</resources>

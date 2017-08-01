@@ -4,11 +4,105 @@
     android:layout_height="match_parent"
     tools:context="austinabell8.sweme.DiscoverFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/discover" />
+    <com.daprlabs.aaron.swipedeck.layouts.SwipeFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:swipedeck="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/swipeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.daprlabs.aaron.swipedeck.SwipeDeck
+                android:id="@+id/swipe_deck"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="4dp"
+                swipedeck:card_spacing="8dp"
+                swipedeck:max_visible="3"
+                swipedeck:swipe_enabled="true" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal|bottom"
+                android:weightSum="4">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal">
+
+                    <ImageButton
+                        android:id="@+id/cancel_button"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/roundedcorner"
+                        android:backgroundTint="@color/md_deep_orange_A400"
+                        android:src="@drawable/ic_clear_grey_24dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal">
+
+                    <ImageButton
+                        android:id="@+id/save_button"
+                        android:layout_width="76dp"
+                        android:layout_height="76dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/largerroundedcorner"
+                        android:backgroundTint="@color/md_blue_A100"
+                        android:src="@drawable/ic_save_grey_42dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal">
+
+                    <ImageButton
+                        android:id="@+id/next_button"
+                        android:layout_width="76dp"
+                        android:layout_height="76dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/largerroundedcorner"
+                        android:backgroundTint="@color/md_blue_grey_300"
+                        android:src="@drawable/ic_arrow_downward_grey_42dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal">
+
+                    <ImageButton
+                        android:id="@+id/like_button"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/roundedcorner"
+                        android:backgroundTint="@color/md_green_A400"
+                        android:src="@drawable/ic_heart_grey_36dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </com.daprlabs.aaron.swipedeck.layouts.SwipeFrameLayout>
 
 </FrameLayout>

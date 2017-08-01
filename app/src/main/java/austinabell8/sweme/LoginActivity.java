@@ -33,7 +33,6 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LoginButton FBLoginButton;
@@ -134,61 +133,65 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_button:
-                progressDialog = new ProgressDialog(LoginActivity.this);
-                progressDialog.setMessage(getString(R.string.authenticating));
-                progressDialog.setCancelable(false);
-                progressDialog.show();
 
-                mFirebaseAuth.signInWithEmailAndPassword(
-                        mEmail.getText().toString(), mPassword.getText().toString())
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "signInWithEmail:success");
-                                    Intent mainIntent = new Intent (LoginActivity.this, MainActivity.class);
-                                    LoginActivity.this.finish();
-                                    LoginActivity.this.startActivity(mainIntent);
-                                    progressDialog.hide();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                    progressDialog.hide();
+                if (!mEmail.getText().toString().isEmpty() && !mPassword.getText().toString().isEmpty()){
+
+                    progressDialog = new ProgressDialog(LoginActivity.this);
+                    progressDialog.setMessage(getString(R.string.authenticating));
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
+
+                    mFirebaseAuth.signInWithEmailAndPassword(
+                            mEmail.getText().toString(), mPassword.getText().toString())
+                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d(TAG, "signInWithEmail:success");
+                                        Intent mainIntent = new Intent (LoginActivity.this, MainActivity.class);
+                                        LoginActivity.this.finish();
+                                        LoginActivity.this.startActivity(mainIntent);
+                                        progressDialog.hide();
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                        Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                        progressDialog.hide();
+                                    }
+
                                 }
+                            });
+                }
 
-                                // ...
-                            }
-                        });
                 break;
             case R.id.sign_up_button:
-                progressDialog = new ProgressDialog(LoginActivity.this);
-                progressDialog.setMessage(getString(R.string.creating_user));
-                progressDialog.setCancelable(false);
-                progressDialog.show();
-
-                mFirebaseAuth.createUserWithEmailAndPassword(
-                        mEmail.getText().toString(), mPassword.getText().toString())
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "createUserWithEmail:success");
-                                    progressDialog.hide();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                    progressDialog.hide();
+                if (!mEmail.getText().toString().isEmpty() && !mPassword.getText().toString().isEmpty()){
+                    progressDialog = new ProgressDialog(LoginActivity.this);
+                    progressDialog.setMessage(getString(R.string.creating_user));
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
+                    mFirebaseAuth.createUserWithEmailAndPassword(
+                            mEmail.getText().toString(), mPassword.getText().toString())
+                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d(TAG, "createUserWithEmail:success");
+                                        progressDialog.hide();
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                        Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                        progressDialog.hide();
+                                    }
                                 }
 
-                                // ...
-                            }
-                        });
+                            });
+                }
                 break;
         }
     }

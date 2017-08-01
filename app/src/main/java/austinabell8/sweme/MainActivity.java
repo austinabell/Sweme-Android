@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity
     private DiscoverFragment mDiscoverFragment;
     private ProfileFragment mProfileFragment;
 
-    private ViewPager viewPager;
+    private LockableViewPager viewPager;
     private BottomNavigationView navigation;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -74,9 +75,10 @@ public class MainActivity extends AppCompatActivity
     private void initView() {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        viewPager = (ViewPager) findViewById(R.id.view_pager_bottom_navigation);
+        viewPager = (LockableViewPager) findViewById(R.id.view_pager_bottom_navigation);
         viewPager.setAdapter(mSectionsPagerAdapter);
         viewPager.addOnPageChangeListener(pageChangeListener);
+        viewPager.setSwipeLocked(true);
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -90,12 +92,15 @@ public class MainActivity extends AppCompatActivity
             switch (item.getItemId()) {
                 case R.id.navigation_feed:
                     viewPager.setCurrentItem(0);
+                    viewPager.setSwipeLocked(false);
                     return true;
                 case R.id.navigation_discover:
                     viewPager.setCurrentItem(1);
+                    viewPager.setSwipeLocked(true);
                     return true;
                 case R.id.navigation_profile:
                     viewPager.setCurrentItem(2);
+                    viewPager.setSwipeLocked(false);
                     return true;
             }
             return false;

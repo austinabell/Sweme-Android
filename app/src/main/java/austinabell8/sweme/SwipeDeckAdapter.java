@@ -13,6 +13,8 @@ import java.util.List;
 
 import com.squareup.picasso.Picasso;
 
+import austinabell8.sweme.R;
+
 
 public class SwipeDeckAdapter extends BaseAdapter {
 

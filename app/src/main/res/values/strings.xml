@@ -22,6 +22,8 @@
     <string name="authenticating">Authenticating...</string>
     <string name="password">Password</string>
     <string name="creating_user">Creating User</string>
+    <string name="dislike_icon">Dislike Icon</string>
+    <string name="like_icon">Like Icon</string>
 
     <item name="visible" type="id"/>
     <item name="masked" type="id"/>

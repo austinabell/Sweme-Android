@@ -2,27 +2,28 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
-    android:layout_gravity="center"
+    android:layout_gravity="bottom"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    card_view:cardCornerRadius="4dp"
+    android:layout_height="match_parent"
+    card_view:cardCornerRadius="8dp"
     card_view:cardElevation="4dp"
     card_view:cardUseCompatPadding="true"
-    android:layout_margin="8dp"
+    android:layout_margin="6dp"
     android:gravity="center"
     android:padding="0dp">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_vertical"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
         android:weightSum="4">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="4">
-            <austinabell8.sweme.SquaredImageView
+            <android.support.v7.widget.AppCompatImageView
                 tools:src="@drawable/galaxy"
                 android:id="@+id/picture_holder"
                 android:layout_width="match_parent"
@@ -32,18 +33,18 @@
 
             <ImageView
                 android:id="@+id/left_image"
-                android:layout_alignParentStart="true"
+                android:contentDescription="@string/dislike_icon"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="70dp"
+                android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_cancel_red_24dp" />
 
             <ImageView
                 android:id="@+id/right_image"
-                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/like_icon"
+                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="60dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_heart_green_24dp" />
@@ -64,6 +65,7 @@
             android:layout_weight="1"
             android:text="Sample Text"
             android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:gravity="center_horizontal"
             android:textSize="20sp" />
 

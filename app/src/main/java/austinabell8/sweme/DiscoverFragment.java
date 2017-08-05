@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 
 
 import com.daprlabs.aaron.swipedeck.SwipeDeck;
+import com.daprlabs.aaron.swipedeck.layouts.SwipeFrameLayout;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
     private View inflatedCustomerLookup;
     private SwipeDeck cardStack;
     private SwipeDeckAdapter adapter;
+    private SwipeFrameLayout swipeFrameLayout;
 
     private final ArrayList<String> mTestData = new ArrayList<>();
 
@@ -39,6 +41,7 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
         inflatedCustomerLookup = inflater.inflate(R.layout.fragment_discover, container, false);
 
         cardStack = (SwipeDeck) inflatedCustomerLookup.findViewById(R.id.swipe_deck);
+        swipeFrameLayout = (SwipeFrameLayout) inflatedCustomerLookup.findViewById(R.id.swipeLayout);
 
         mTestData.add("0");
         mTestData.add("1");
@@ -86,33 +89,45 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardStack.swipeTopCardLeft(180);
+                cardStack.swipeTopCardLeft(400);
             }
         });
         ImageButton likeButton = (ImageButton) inflatedCustomerLookup.findViewById(R.id.like_button);
         likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardStack.swipeTopCardRight(180);
+                cardStack.swipeTopCardRight(400);
             }
         });
         ImageButton saveButton = (ImageButton) inflatedCustomerLookup.findViewById(R.id.save_button);
         saveButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                cardStack.swipeTopCardTop(350);
+                cardStack.swipeTopCardTop(600);
             }
         });
         ImageButton nextButton = (ImageButton) inflatedCustomerLookup.findViewById(R.id.next_button);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardStack.swipeTopCardBottom(350);
+                cardStack.swipeTopCardBottom(600);
             }
         });
 
         return inflatedCustomerLookup;
     }
+
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        swipeFrameLayout.setBackgroundResource(0);
+//    }
+//
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        swipeFrameLayout.setBackgroundResource(R.drawable.primary_fade);
+//    }
 
     @Override
     public void onAttach(Context context) {
@@ -145,4 +160,12 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
         adapter.notifyDataSetChanged();
     }
 
+    public void addBackgroundFade (Boolean b) {
+        if (b==true){
+            swipeFrameLayout.setBackgroundResource(R.drawable.primary_fade);
+        }
+        else {
+            swipeFrameLayout.setBackgroundResource(0);
+        }
+    }
 }

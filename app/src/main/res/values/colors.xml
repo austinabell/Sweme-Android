@@ -10,21 +10,23 @@
     <color name="colorPrimary">#212121</color>
     <color name="colorPrimaryDark">#000000</color>
     <!--<color name="colorAccent">#7E57C2</color>-->
+    <color name="accentFaded">#20D500F9</color>
 
     <!-- orange option-->
-    <!--<color name="colorAccent">#FF6D00</color>-->
+    <!--<color name="colorAccent">#FFC400</color>-->
 
     <!-- blue/green option-->
-    <color name="colorAccent">#3bd39b</color>
+    <!--<color name="colorAccent">#3bd39b</color>-->
+    <!--<color name="accentFaded">#213bd39b</color>-->
 
     <!-- blue option-->
-    <!--<color name="colorAccent">#1DE9B6</color>-->
+    <!--<color name="colorAccent">#18FFFF</color>-->
 
     <!-- black/ white option-->
     <!--<color name="colorAccent">#eaeaea</color>-->
 
     <!-- red option-->
-    <!--<color name="colorAccent">#d32f2f</color>-->
+    <color name="colorAccent">#D500F9</color>
 
 
     <color name="textColor">#dddddd</color>

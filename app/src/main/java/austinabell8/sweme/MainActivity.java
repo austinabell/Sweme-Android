@@ -2,6 +2,7 @@ package austinabell8.sweme;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -13,13 +14,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+
+import austinabell8.sweme.helpers.LockableViewPager;
 
 public class MainActivity extends AppCompatActivity
         implements FeedFragment.OnFragmentInteractionListener,
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity
     private LockableViewPager viewPager;
     private BottomNavigationView navigation;
 
+    private boolean doubleBackToExitPressedOnce = false;
+
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     @Override
@@ -45,6 +49,7 @@ public class MainActivity extends AppCompatActivity
 
         initView();
 
+        //default discover tab on open
         View view = navigation.findViewById(R.id.navigation_discover);
         view.performClick();
     }
@@ -72,6 +77,26 @@ public class MainActivity extends AppCompatActivity
         //you can leave it empty
     }
 
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
+
+    //create view
     private void initView() {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -201,6 +226,8 @@ public class MainActivity extends AppCompatActivity
         public int getCount() {
             return 3;
         }
+
+
 
 //        @Override
 //        public CharSequence getPageTitle(int position) {

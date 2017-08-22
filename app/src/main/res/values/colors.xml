@@ -18,8 +18,9 @@
     <!-- blue/green option-->
     <color name="colorAccent">#3bd39b</color>
     <color name="accentFaded">#213bd39b</color>
-    <!--<color name="SecondaryAccentFaded">#2181D4fA</color>-->
+    <!--<color name="SecondaryAccentFaded">#40FFB347</color>-->
     <color name="SecondaryAccentFaded">#45FFFFFF</color>
+    <!--<color name="SecondaryAccentFaded">#45F24473</color>-->
 
     <!-- blue option-->
     <!--<color name="colorAccent">#18FFFF</color>-->

@@ -23,13 +23,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="4dp"
+
                 android:layout_marginBottom="100dp"
                 swipedeck:card_spacing="2dp"
                 swipedeck:max_visible="3"
                 swipedeck:swipe_enabled="true" />
-
-
-
 
         <!--</LinearLayout>-->
 

@@ -1,7 +1,5 @@
 package austinabell8.sweme;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,13 +14,13 @@ import com.austinabell8.cardswipe.layout.SwipeFrameLayout;
 import java.util.ArrayList;
 
 
-public class DiscoverFragment extends Fragment implements View.OnClickListener {
+public class DiscoverFragment extends Fragment {
 
-    private DiscoverFragment.OnFragmentInteractionListener mListener;
     private View inflatedCustomerLookup;
     private SwipeDeck cardStack;
     private SwipeDeckAdapter adapter;
     private SwipeFrameLayout swipeFrameLayout;
+    private int counter;
 
     private final ArrayList<String> mTestData = new ArrayList<>();
 
@@ -43,11 +41,14 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
         cardStack = (SwipeDeck) inflatedCustomerLookup.findViewById(R.id.swipe_deck);
         swipeFrameLayout = (SwipeFrameLayout) inflatedCustomerLookup.findViewById(R.id.swipeLayout);
 
-        mTestData.add("0");
-        mTestData.add("1");
-        mTestData.add("2");
-        mTestData.add("3");
-        mTestData.add("4");
+        counter = 0;
+        mTestData.add(counter++ + "");
+        mTestData.add(counter++ + "");
+        mTestData.add(counter++ + "");
+        mTestData.add(counter++ + "");
+        mTestData.add(counter++ + "");
+        mTestData.add(counter++ + "");
+
 
         adapter = new SwipeDeckAdapter(mTestData, getActivity());
         if(cardStack != null){
@@ -83,6 +84,8 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
 
         cardStack.setLeftImage(R.id.left_image);
         cardStack.setRightImage(R.id.right_image);
+        cardStack.setTopImage(R.id.top_image);
+        cardStack.setBottomImage(R.id.bottom_image);
 
         //example of buttons triggering events on the deck
         ImageButton cancelButton = (ImageButton) inflatedCustomerLookup.findViewById(R.id.cancel_button);
@@ -117,55 +120,10 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
         return inflatedCustomerLookup;
     }
 
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        swipeFrameLayout.setBackgroundResource(0);
-//    }
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        swipeFrameLayout.setBackgroundResource(R.drawable.primary_fade);
-//    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof DiscoverFragment.OnFragmentInteractionListener) {
-            mListener = (DiscoverFragment.OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
 
     private void addNext(){
-        mTestData.add("a sample string.");
+        mTestData.add(counter++ + "");
         adapter.notifyDataSetChanged();
     }
 
-//    public void addBackgroundFade (Boolean b) {
-//        if (b==true){
-//            swipeFrameLayout.setBackgroundResource(R.drawable.primary_fade);
-//        }
-//        else {
-//            swipeFrameLayout.setBackgroundResource(0);
-//        }
-//    }
 }

@@ -16,6 +16,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -26,14 +28,13 @@ import austinabell8.sweme.helpers.LockableViewPager;
 
 public class MainActivity extends AppCompatActivity
         implements FeedFragment.OnFragmentInteractionListener,
-        DiscoverFragment.OnFragmentInteractionListener,
         ProfileFragment.OnFragmentInteractionListener,
         View.OnClickListener {
 
     private FeedFragment mFeedFragment;
     private DiscoverFragment mDiscoverFragment;
     private ProfileFragment mProfileFragment;
-    private LinearLayout mLinearLayout;
+    private View mFadeView;
 
     private LockableViewPager viewPager;
     private BottomNavigationView navigation;
@@ -47,13 +48,13 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        mFadeView = findViewById(R.id.fadeView);
 
         initView();
 
         //default discover tab on open
         View view = navigation.findViewById(R.id.navigation_discover);
         view.performClick();
-        mLinearLayout = (LinearLayout) findViewById(R.id.llMainActivity);
         addBackgroundFade(true);
     }
 
@@ -146,12 +147,15 @@ public class MainActivity extends AppCompatActivity
             switch (position) {
                 case 0:
                     navigation.setSelectedItemId(R.id.navigation_feed);
+                    addBackgroundFade(false);
                     break;
                 case 1:
                     navigation.setSelectedItemId(R.id.navigation_discover);
+                    addBackgroundFade(true);
                     break;
                 case 2:
                     navigation.setSelectedItemId(R.id.navigation_profile);
+                    addBackgroundFade(false);
                     break;
             }
         }
@@ -188,11 +192,28 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void addBackgroundFade (Boolean b) {
-        if (b==true){
-            mLinearLayout.setBackgroundResource(R.drawable.primary_fade);
+        if (b){
+//            mFadeView.setBackgroundResource(R.drawable.primary_fade);
+            Animation fadeIn = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_in);
+            mFadeView.setBackgroundResource(R.drawable.primary_fade);
+            mFadeView.startAnimation(fadeIn);
         }
         else {
-            mLinearLayout.setBackgroundResource(0);
+            final Animation fadeOut = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_out);
+            mFadeView.startAnimation(fadeOut);
+            fadeOut.setAnimationListener(new Animation.AnimationListener(){
+                @Override
+                public void onAnimationStart(Animation animation) {
+                }
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    mFadeView.setBackgroundResource(0);
+                    fadeOut.setAnimationListener(null);
+                }
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
+            });
         }
     }
 

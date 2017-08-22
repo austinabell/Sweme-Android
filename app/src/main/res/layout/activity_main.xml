@@ -1,37 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:id="@+id/llMainActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="austinabell8.sweme.MainActivity">
+    android:layout_height="match_parent">
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        style="@style/BottomNavigation"
-        app:itemIconTint="@drawable/bnv_tab_color"
-        app:itemTextColor="@drawable/bnv_text_color"
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/llMainActivity"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@android:color/transparent"
-        app:elevation="8dp"
-        android:paddingTop="10dp"
-        android:layout_gravity="bottom"
-        app:layout_scrollFlags="scroll|enterAlways|snap"
-        app:menu="@menu/navigation" />
+        android:layout_height="match_parent"
+        tools:context="austinabell8.sweme.MainActivity">
 
-    <!--<FrameLayout-->
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigation"
+            style="@style/BottomNavigation"
+            app:itemIconTint="@drawable/bnv_tab_color"
+            app:itemTextColor="@drawable/bnv_text_color"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@android:color/transparent"
+            app:elevation="-1dp"
+            android:paddingTop="10dp"
+            android:layout_gravity="bottom"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:menu="@menu/navigation" />
+
+        <!--<FrameLayout-->
         <!--android:id="@+id/fragmentContainer"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->
         <!--android:layout_below="@+id/navigation"-->
         <!--android:animateLayoutChanges="true" />-->
-    <austinabell8.sweme.helpers.LockableViewPager
-        android:id="@+id/view_pager_bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        <austinabell8.sweme.helpers.LockableViewPager
+            android:id="@+id/view_pager_bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-</LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/fadeView"
+        android:background="@drawable/primary_fade"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="90dp">
+
+    </View>
+
+
+
+</RelativeLayout>

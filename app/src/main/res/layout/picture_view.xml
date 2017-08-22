@@ -51,6 +51,24 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_heart_green_24dp" />
 
+            <ImageView
+                android:id="@+id/top_image"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_save_grey_42dp"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:id="@+id/bottom_image"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_downward_grey_42dp"
+                android:layout_gravity="center"/>
+
         </RelativeLayout>
 
         <LinearLayout

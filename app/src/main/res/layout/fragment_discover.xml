@@ -4,10 +4,9 @@
     android:layout_height="match_parent"
     tools:context="austinabell8.sweme.DiscoverFragment">
 
-    <com.daprlabs.aaron.swipedeck.layouts.SwipeFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.austinabell8.cardswipe.layout.SwipeFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:swipedeck="http://schemas.android.com/apk/res-auto"
         android:id="@+id/swipeLayout"
-        android:background="@drawable/primary_fade"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -18,7 +17,7 @@
             <!--android:gravity="bottom"-->
             <!--android:orientation="vertical">-->
 
-            <com.daprlabs.aaron.swipedeck.SwipeDeck
+            <com.austinabell8.cardswipe.SwipeDeck
                 android:id="@+id/swipe_deck"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -35,7 +34,7 @@
         <!--</LinearLayout>-->
 
 
-    </com.daprlabs.aaron.swipedeck.layouts.SwipeFrameLayout>
+    </com.austinabell8.cardswipe.layout.SwipeFrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

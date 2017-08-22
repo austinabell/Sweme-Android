@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 
-import com.daprlabs.aaron.swipedeck.SwipeDeck;
-import com.daprlabs.aaron.swipedeck.layouts.SwipeFrameLayout;
+import com.austinabell8.cardswipe.SwipeDeck;
+import com.austinabell8.cardswipe.layout.SwipeFrameLayout;
 
 import java.util.ArrayList;
 
@@ -160,12 +160,12 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
         adapter.notifyDataSetChanged();
     }
 
-    public void addBackgroundFade (Boolean b) {
-        if (b==true){
-            swipeFrameLayout.setBackgroundResource(R.drawable.primary_fade);
-        }
-        else {
-            swipeFrameLayout.setBackgroundResource(0);
-        }
-    }
+//    public void addBackgroundFade (Boolean b) {
+//        if (b==true){
+//            swipeFrameLayout.setBackgroundResource(R.drawable.primary_fade);
+//        }
+//        else {
+//            swipeFrameLayout.setBackgroundResource(0);
+//        }
+//    }
 }

@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
@@ -29,10 +30,10 @@ public class MainActivity extends AppCompatActivity
         ProfileFragment.OnFragmentInteractionListener,
         View.OnClickListener {
 
-    private Fragment mFragment;
     private FeedFragment mFeedFragment;
     private DiscoverFragment mDiscoverFragment;
     private ProfileFragment mProfileFragment;
+    private LinearLayout mLinearLayout;
 
     private LockableViewPager viewPager;
     private BottomNavigationView navigation;
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity
         //default discover tab on open
         View view = navigation.findViewById(R.id.navigation_discover);
         view.performClick();
+        mLinearLayout = (LinearLayout) findViewById(R.id.llMainActivity);
+        addBackgroundFade(true);
     }
 
     @Override
@@ -169,7 +172,8 @@ public class MainActivity extends AppCompatActivity
                     Toast.LENGTH_SHORT).show();
         } else {
             Intent openIntent = new Intent(MainActivity.this, LoginActivity.class);
-            MainActivity.this.startActivity(openIntent);
+            finish();
+            startActivity(openIntent);
 
         }
     }
@@ -180,6 +184,15 @@ public class MainActivity extends AppCompatActivity
             case R.id.log_out_button:
                 logout();
                 break;
+        }
+    }
+
+    public void addBackgroundFade (Boolean b) {
+        if (b==true){
+            mLinearLayout.setBackgroundResource(R.drawable.primary_fade);
+        }
+        else {
+            mLinearLayout.setBackgroundResource(0);
         }
     }
 
@@ -242,6 +255,7 @@ public class MainActivity extends AppCompatActivity
 //            }
 //            return null;
 //        }
+
     }
 
 }

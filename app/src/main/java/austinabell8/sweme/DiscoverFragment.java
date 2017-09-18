@@ -22,7 +22,7 @@ public class DiscoverFragment extends Fragment {
     private SwipeFrameLayout swipeFrameLayout;
     private int counter;
 
-    private final ArrayList<String> mTestData = new ArrayList<>();
+    private final ArrayList<Meme> mTestData = new ArrayList<>();
 
 
     public DiscoverFragment() {
@@ -42,12 +42,10 @@ public class DiscoverFragment extends Fragment {
         swipeFrameLayout = (SwipeFrameLayout) inflatedCustomerLookup.findViewById(R.id.swipeLayout);
 
         counter = 0;
-        mTestData.add(counter++ + "");
-        mTestData.add(counter++ + "");
-        mTestData.add(counter++ + "");
-        mTestData.add(counter++ + "");
-        mTestData.add(counter++ + "");
-        mTestData.add(counter++ + "");
+        mTestData.add(new Meme(R.drawable.blue_solid, counter++ + ""));
+        mTestData.add(new Meme(R.drawable.green_solid, counter++ + ""));
+        mTestData.add(new Meme(R.drawable.yellow_solid, counter++ + ""));
+
 
 
         adapter = new SwipeDeckAdapter(mTestData, getActivity());
@@ -122,7 +120,15 @@ public class DiscoverFragment extends Fragment {
 
 
     private void addNext(){
-        mTestData.add(counter++ + "");
+        if (counter%3==0){
+            mTestData.add(new Meme(R.drawable.blue_solid, counter++ + ""));
+        }
+        else if (counter%3==1){
+            mTestData.add(new Meme(R.drawable.green_solid, counter++ + ""));
+        }
+        else {
+            mTestData.add(new Meme(R.drawable.yellow_solid, counter++ + ""));
+        }
         adapter.notifyDataSetChanged();
     }
 

@@ -18,10 +18,10 @@ import austinabell8.sweme.R;
 
 public class SwipeDeckAdapter extends BaseAdapter {
 
-    private List<String> data;
+    private List<Meme> data;
     private Context context;
 
-    public SwipeDeckAdapter(List<String> data, Context context) {
+    public SwipeDeckAdapter(List<Meme> data, Context context) {
         this.data = data;
         this.context = context;
     }
@@ -54,10 +54,10 @@ public class SwipeDeckAdapter extends BaseAdapter {
         }
 
         ImageView imageView = (ImageView) v.findViewById(R.id.picture_holder);
-        Picasso.with(context).load(R.drawable.galaxy).fit().centerCrop().into(imageView);
         TextView textView = (TextView) v.findViewById(R.id.sample_text);
-        String item = (String)getItem(position);
-        textView.setText(item);
+        Meme item = (Meme)getItem(position);
+        Picasso.with(context).load(item.getImageResource()).fit().centerCrop().into(imageView);
+        textView.setText(item.getDescription());
 
         v.setOnClickListener(new View.OnClickListener() {
             @Override

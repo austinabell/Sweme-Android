@@ -1,4 +1,4 @@
-package austinabell8.sweme;
+package austinabell8.sweme.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,6 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
+
+import austinabell8.sweme.R;
+import austinabell8.sweme.activities.MainActivity;
 
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
@@ -15,6 +22,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private ProfileFragment.OnFragmentInteractionListener mListener;
     private View inflatedCustomerLookup;
     private Button mLogoutButton;
+    private TextView mProfileName;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -37,6 +45,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         mLogoutButton = (Button) inflatedCustomerLookup.findViewById(R.id.log_out_button);
         mLogoutButton.setOnClickListener(this);
+
+        mProfileName = (TextView) inflatedCustomerLookup.findViewById(R.id.profile_name);
+        mProfileName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
 
         return inflatedCustomerLookup;
     }

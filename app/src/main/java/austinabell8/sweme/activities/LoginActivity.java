@@ -1,4 +1,4 @@
-package austinabell8.sweme;
+package austinabell8.sweme.activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -33,6 +33,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import austinabell8.sweme.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 

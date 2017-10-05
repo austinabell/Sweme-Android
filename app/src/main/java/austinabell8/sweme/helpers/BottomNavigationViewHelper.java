@@ -1,4 +1,4 @@
-package austinabell8.sweme;
+package austinabell8.sweme.helpers;
 
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;

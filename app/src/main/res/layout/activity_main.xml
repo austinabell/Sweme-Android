@@ -11,7 +11,7 @@
         android:id="@+id/llMainActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="austinabell8.sweme.MainActivity">
+        tools:context="austinabell8.sweme.activities.MainActivity">
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/navigation"

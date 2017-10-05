@@ -1,4 +1,4 @@
-package austinabell8.sweme;
+package austinabell8.sweme.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +12,10 @@ import com.austinabell8.cardswipe.SwipeDeck;
 import com.austinabell8.cardswipe.layout.SwipeFrameLayout;
 
 import java.util.ArrayList;
+
+import austinabell8.sweme.Meme;
+import austinabell8.sweme.R;
+import austinabell8.sweme.adapters.SwipeDeckAdapter;
 
 
 public class DiscoverFragment extends Fragment {

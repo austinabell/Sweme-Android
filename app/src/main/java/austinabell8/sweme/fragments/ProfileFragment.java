@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 
 import austinabell8.sweme.R;
@@ -23,6 +22,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private View inflatedCustomerLookup;
     private Button mLogoutButton;
     private TextView mProfileName;
+    private TextView mJoinedDate;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -48,6 +48,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         mProfileName = (TextView) inflatedCustomerLookup.findViewById(R.id.profile_name);
         mProfileName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+
+        mJoinedDate = (TextView) inflatedCustomerLookup.findViewById(R.id.joined_date);
 
         return inflatedCustomerLookup;
     }

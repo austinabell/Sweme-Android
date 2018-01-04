@@ -3,6 +3,7 @@ package austinabell8.sweme.activities;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -51,6 +52,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+    private SharedPreferences mPreferences;
+
     private static final String TAG = "Sweme.LoginActivity";
 //    private static final int RC_SIGN_IN = 123;
 
@@ -92,6 +95,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 return false;
             }
         });
+
+        mPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+        mEmail.setText(mPreferences.getString("email", ""));
 
         // Callback registration
         FBLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -155,6 +161,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "signInWithEmail:success");
+                                        SharedPreferences.Editor prefEditor = mPreferences.edit();
+                                        prefEditor.putString("email", mEmail.getText().toString());
+                                        prefEditor.apply();
                                         Intent mainIntent = new Intent (LoginActivity.this, MainActivity.class);
                                         LoginActivity.this.finish();
                                         LoginActivity.this.startActivity(mainIntent);
@@ -186,6 +195,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "createUserWithEmail:success");
+                                        SharedPreferences.Editor prefEditor = mPreferences.edit();
+                                        prefEditor.putString("email", mEmail.getText().toString());
+                                        prefEditor.apply();
                                         progressDialog.hide();
                                     } else {
                                         // If sign in fails, display a message to the user.
@@ -206,6 +218,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onResume(){
         super.onResume();
         mFirebaseAuth.addAuthStateListener(mAuthListener);
+        if (progressDialog != null) {
+            //If process is cancelled by leaving app, be able to cancel dialog
+            progressDialog.setCancelable(true);
+        }
     }
 
     @Override

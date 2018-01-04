@@ -20,7 +20,7 @@
             app:itemTextColor="@drawable/bnv_text_color"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:background="@android:color/transparent"
+            android:background="@color/md_grey_800"
             app:elevation="-1dp"
             android:paddingTop="10dp"
             android:layout_gravity="bottom"
